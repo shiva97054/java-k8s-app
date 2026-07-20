@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'devopstest'
+    }
 
     environment {
         DOCKER_IMAGE = "shivareddy214/java-k8s-app"
