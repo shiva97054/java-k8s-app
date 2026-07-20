@@ -3,12 +3,15 @@ pipeline {
         label 'devopstest'
     }
 
+    tools {
+        git 'LinuxGit'
+    }
+
     environment {
         DOCKER_IMAGE = "shivareddy214/java-k8s-app"
     }
 
     stages {
-
         stage('Checkout') {
             steps {
                 checkout scm
@@ -53,8 +56,7 @@ pipeline {
                     kubectl set image deployment/java-k8s-app \
                     java-k8s-app=$DOCKER_IMAGE:$BUILD_NUMBER
 
-                    kubectl rollout status \
-                    deployment/java-k8s-app \
+                    kubectl rollout status deployment/java-k8s-app \
                     --timeout=120s
                 '''
             }
